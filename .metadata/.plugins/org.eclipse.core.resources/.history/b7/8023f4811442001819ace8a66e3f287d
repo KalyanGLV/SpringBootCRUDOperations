@@ -1,0 +1,9 @@
+package Utils;
+
+/*
+ * kg972t
+ * 
+ */
+public class ProdcutException extends Exception {
+
+}

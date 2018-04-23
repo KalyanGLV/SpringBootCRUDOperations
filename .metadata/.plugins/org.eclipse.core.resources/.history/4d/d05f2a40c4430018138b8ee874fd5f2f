@@ -1,0 +1,18 @@
+package com.ibm.demo.service;
+/*
+ * 
+ * 
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ibm.demo.processor.ProductProcessor;
+
+@Service
+public class ProductService {
+	
+	@Autowired
+	ProductProcessor productProcessor;
+
+}

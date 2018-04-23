@@ -1,0 +1,110 @@
+package com.ibm.demo.processor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ibm.demo.beans.Products;
+import com.ibm.demo.utils.ProdcutException;
+import com.ibm.demo.utils.Valiidation;
+
+@Component
+public class ProductProcessor {
+
+	@Autowired
+	Valiidation valiidation;
+
+	private static final Map<String, Products> productsMap = new HashMap<>();
+
+	
+
+		Products p1 = new Products("1", "AVPN", "AVPN Service", "AVPN Dedicated,MIS", "image");
+		Products p2 = new Products("2", "MIS", "MIS Service", "AVPN,AVPN Dedicated", "image");
+		Products p3 = new Products("3", "AVPN Dedicated", "AVPN Dedicated Service", "MIS,AVPN", "image");
+		public ProductProcessor() {
+		productsMap.put(p1.getProductId(), p1);
+		productsMap.put(p2.getProductId(), p2);
+		productsMap.put(p3.getProductId(), p3);
+		}
+	
+
+	public List<Products> getAllProducts() {
+		List<Products> pl = new ArrayList<>();
+		for (String s : productsMap.keySet()) {
+			pl.add(productsMap.get(s));
+		}
+		return pl;
+
+	}
+
+	public Products getProduct(String id) {
+
+		return productsMap.get(id);
+
+	}
+
+	public List<Products> updateProduct(Products product) throws ProdcutException {
+		
+		
+			productsMap.replace(product.getProductId(), product);
+			List<Products> productsList = new ArrayList<Products>();
+			productsMap.forEach((s,p)->{
+				productsList.add(p);
+			});
+			return productsList;
+			
+	}
+
+	public static int deleteProduct(Products product) throws ProdcutException {
+		int status = 0;
+		try {
+			productsMap.remove(product.getProductId());
+			status = 1;
+			return status;
+		} catch (Exception e) {
+			throw new ProdcutException("01", "Please enter the existing valid productId");
+		}
+
+	}
+
+	public String deleteAllProduct() {
+		productsMap.clear();
+		return "Deleted successfully";
+
+	}
+
+	public List<Products> addProduct(Products product) throws ProdcutException {
+		List<String> required = valiidation.validate(product);
+		StringBuilder error = new StringBuilder("Required Data Missing: ");
+		if (!required.isEmpty())
+
+		{
+			for (int i = 0; i < required.size(); i++) {
+				error.append(required.get(i));
+				if (i < required.size() - 1)
+					error.append(",");
+			}
+			throw new ProdcutException("01", error.toString());
+		}
+		productsMap.put(product.getProductId(), product);
+		return getAllProducts();
+
+	}
+
+	public boolean isExist(Products product) {
+		boolean exist = false;
+		String productId = product.getProductId();
+		for (String id : productsMap.keySet()) {
+			if (productId.equalsIgnoreCase(id))
+				exist = true;
+
+		}
+		return exist;
+
+	}
+
+}

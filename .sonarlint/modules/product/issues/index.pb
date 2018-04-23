@@ -1,0 +1,21 @@
+
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+b
+2src/main/java/com/ibm/demo/ProductApplication.java,1\7\17088fc470a7ef6ce3ce01854c125c950658029e
+b
+2src/main/java/com/ibm/demo/ServletInitializer.java,5\4\54925c4cfbf061e99bae2314a865bf59e1cab32a
+Z
+*src/main/java/com/ibm/demo/beans/User.java,3\e\3e13bb4926850d14c4faa6b4add7abc2f239fd73
+^
+.src/main/java/com/ibm/demo/beans/Products.java,b\d\bd09717e09a9e740c79af758159dca32b0958e44
+P
+ src/main/java/Utils/Funclib.java,4\f\4f51b48405adbb0966be450ac88182ae040b93ff
+j
+:src/main/java/com/ibm/demo/processor/ProductProcessor.java,9\b\9b96c3ce274b752cd901beedf1311880cef89ad3
+d
+4src/main/java/com/ibm/demo/service/LoginService.java,3\9\39a6afb4b8daf5631f72ce820939ca246dedc98a
+j
+:src/main/java/com/ibm/demo/controller/LoginController.java,4\c\4c01c464a38061d183bf5d9330935a1fe4be2ca0
+Y
+)src/main/resources/application.properties,0\6\06f65155ec73600b9fc5c4dc2883d4bb84d8e284

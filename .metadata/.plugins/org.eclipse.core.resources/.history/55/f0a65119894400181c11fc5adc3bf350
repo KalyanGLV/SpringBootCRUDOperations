@@ -1,0 +1,7 @@
+<%@page import="com.ibm.demo.processor.ProductProcessor,com.ibm.demo.beans.Products"%>  
+<jsp:useBean id="u" class="com.ibm.demo.beans.Products"></jsp:useBean>  
+<jsp:setProperty property="*" name="u"/>  
+<%  
+int i= ProductProcessor.updateProduct(u);  
+response.sendRedirect("viewusers.jsp");  
+%> 

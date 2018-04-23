@@ -1,0 +1,59 @@
+package com.ibm.demo.processor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import com.ibm.demo.beans.Products;
+
+@Component
+public class ProductProcessor {
+	private static final Map<String, Products> productsList = new HashMap<>();
+
+	static {
+
+		Products p1 = new Products("1", "AVPN", "AVPN Service", "AVPN Dedicated,MIS", "image");
+		Products p2 = new Products("2", "MIS", "MIS Service", "AVPN,AVPN Dedicated", "image");
+		Products p3 = new Products("3", "AVPN Dedicated", "AVPN Dedicated Service", "MIS,AVPN", "image");
+		productsList.put("1", p1);
+		productsList.put("2", p2);
+		productsList.put("3", p3);
+	}
+
+	public List<Products> getAllProducts() {
+		List<Products> pl = new ArrayList<>();
+		for (String s : productsList.keySet()) {
+			pl.add(productsList.get(s));
+		}
+		return pl;
+
+	}
+
+	public List<Products> updateProduct(String key, Products product) {
+		productsList.replace(key, product);
+		return getAllProducts();
+
+	}
+
+	public List<Products> deleteProduct(String key) {
+		productsList.remove(key);
+		return getAllProducts();
+
+	}
+
+	public String deleteAllProduct() {
+		productsList.clear();
+		return "Deleted successfully";
+
+	}
+
+	public List<Products> addProduct(String key, Products product) {
+		productsList.put(key, product);
+		return getAllProducts();
+
+	}
+
+}

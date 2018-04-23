@@ -1,0 +1,43 @@
+package com.ibm.demo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ibm.demo.service.LoginService;
+import com.ibm.demo.utils.ProdcutException;
+
+@RestController
+public class LoginController {
+
+	@Autowired
+	LoginService service;
+
+	@RequestMapping(value = "/login")
+	public String showWelcomePage(HttpServletRequest request,Model model) throws ProdcutException {
+
+		String isValidUser = service.validateUser(request);
+
+		if(!StringUtils.isEmpty(isValidUser)) {
+			model.addAttribute("userName", isValidUser);
+		return "home.jsp";
+		}
+		
+		else {
+			throw new ProdcutException("00", "Invalid Credentials");
+		}
+
+	}
+	
+	
+}

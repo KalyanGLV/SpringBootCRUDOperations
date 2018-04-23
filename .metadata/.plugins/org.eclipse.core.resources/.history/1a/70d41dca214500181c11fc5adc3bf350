@@ -1,0 +1,68 @@
+package com.ibm.demo.controller;
+/*
+ * kg972t
+ * 
+ */
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ibm.demo.beans.Products;
+import com.ibm.demo.service.ProductService;
+import com.ibm.demo.utils.ProdcutException;
+
+@Controller
+public class ProductController {
+	
+	@Autowired
+	ProductService productService;
+	
+	@RequestMapping(value = "/login/getProducts")
+	public String getAllProduct(Model model) {
+		List<Products> p = productService.getAllProducts();
+	//	model.addAllAttributes(p);
+		model.addAttribute("p", p);
+		return "allProducts";
+		 
+	}
+	
+	@RequestMapping(value = "/login/{id}/getProduct")
+	public String getProduct(@PathVariable("id") String id,Model model) throws ProdcutException {
+		Products p = productService.getProducts(id);
+		model.addAttribute("p",p);
+		return "editform";
+		 
+	}
+	
+	/*@RequestMapping(value = "/login/deleteProduct")
+	public List<Products> deleteProduct(@RequestBody Products product) throws ProdcutException {
+		return productService.deleteProduct(product);
+		 
+	}*/
+	
+	@RequestMapping(value = "/login/deleteAllProducts")
+	public String deleteAllProducts() {
+		return productService.deleteAllProduct();
+		 
+	}
+	
+	@RequestMapping(value = "/login/updateProduct")
+	public List<Products> updateProduct(@RequestBody Products product) throws ProdcutException {
+		return productService.updateProduct(product);
+		 
+	}
+	
+	@RequestMapping(value = "/login/addProduct")
+	public List<Products> addProduct(@RequestBody Products product) throws ProdcutException {
+		return productService.addProduct(product);
+		 
+	}
+
+
+}

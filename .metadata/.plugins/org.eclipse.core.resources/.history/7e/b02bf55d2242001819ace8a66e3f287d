@@ -1,0 +1,77 @@
+package com.ibm.demo.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.stereotype.Service;
+
+import com.ibm.demo.beans.Products;
+import com.ibm.demo.processor.ProductProcessor;
+import com.ibm.demo.utils.Funclib;
+import com.ibm.demo.utils.ProdcutException;
+
+@Service
+public class LoginService {
+	public static final Logger logger = LoggerFactory.getLogger(LoginService.class);
+
+	@Autowired
+	ProductProcessor productProcessor;
+
+	@Value("${userName}")
+	private String uN;
+
+	@Value("${password}")
+	private String pwd;
+
+	@Value("${uName}")
+	private String uName;
+
+	@Value("${pass}")
+	private String password;
+
+	public String validateUser(String userName, String pass) {
+		String who = null;
+		if (Funclib.isAllTrue(uN.equals(userName), pwd.equals(pass))) {
+			who = uN;
+		} else if (Funclib.isAllTrue(uName.equals(userName), password.equals(pass)))
+			who = uName;
+
+		return who;
+	}
+
+	public List<Products> getAllProducts() {
+		return productProcessor.getAllProducts();
+
+	}
+
+	public List<Products> updateProduct(Products product) throws ProdcutException {
+		return productProcessor.updateProduct(product);
+
+	}
+
+	public List<Products> deleteProduct(Products product) throws ProdcutException {
+		return productProcessor.deleteProduct(product);
+
+	}
+
+	public String deleteAllProduct() {
+		return productProcessor.deleteAllProduct();
+
+	}
+
+	public List<Products> addProduct(Products product) {
+		return productProcessor.addProduct(product);
+
+	}
+
+}

@@ -1,0 +1,9 @@
+<%@page import="com.ibm.demo.processor.ProductProcessor"%>  
+<jsp:useBean id="u" class="com.ibm.demo.beans.Products"></jsp:useBean>  
+<jsp:setProperty property="*" name="u"/>  
+<% 
+
+
+ProductProcessor.deleteProduct(u);
+response.sendRedirect("allProducts.jsp");
+%>

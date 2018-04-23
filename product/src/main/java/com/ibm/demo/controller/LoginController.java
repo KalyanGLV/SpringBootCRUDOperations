@@ -1,0 +1,45 @@
+package com.ibm.demo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ibm.demo.service.LoginService;
+
+@Controller
+public class LoginController {
+	Logger log = LoggerFactory.getLogger(this.getClass().getName());
+
+	@Autowired
+	LoginService service;
+
+	@RequestMapping(value = "/login")
+	public String showLoginPage(HttpServletRequest request, Model model) {
+		log.info("in showLoginPage");
+		String isValidUser = service.validateUser(request);
+
+		if (!StringUtils.isEmpty(isValidUser)) {
+			model.addAttribute("userName", isValidUser);
+			return "home";
+		} else {
+			String fail = "Authentication Failed";
+			model.addAttribute("errorDescr", fail);
+			return "er";
+		}
+
+	}
+
+}

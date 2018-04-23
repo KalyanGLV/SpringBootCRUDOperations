@@ -1,0 +1,62 @@
+package com.ibm.demo.service;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.stereotype.Service;
+
+import com.ibm.demo.beans.User;
+
+import Utils.Funclib;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+@Service
+public class LoginService {
+	HashMap<String, User> allAdmins = new HashMap<String, User>();
+
+	User a1 = new User("kg972t", "welcome");
+	User a2 = new User("sy7004", "welcome");
+
+	public LoginService()
+	{
+		allAdmins.put("ar614c", a1);
+		allAdmins.put("kd8548", a2);
+
+	}
+
+	public ArrayList<User> getAllAdmins() {
+
+		ArrayList<User> UserList = new ArrayList<User>();
+
+		for (Entry<String, User> map : allAdmins.entrySet()) {
+
+			UserList.add(map.getValue());
+
+		}
+		System.out.println("sixe  :" + UserList.size());
+		return UserList;
+	}
+
+	public User getAdmin(String id) {
+		return allAdmins.get(id);
+	}
+
+	public boolean validateUser(String id, String password) {
+		boolean valid = true;
+		String pwd = Funclib.nullCheckAndSet(allAdmins.get(id));
+		if(allAdmins.get(id)) {
+			
+		}
+		
+		return false;
+	}
+
+	
+
+}

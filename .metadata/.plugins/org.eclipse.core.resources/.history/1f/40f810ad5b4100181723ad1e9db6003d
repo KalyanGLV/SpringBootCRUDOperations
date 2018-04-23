@@ -1,0 +1,47 @@
+package com.ibm.demo.service;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class LoginService {
+	HashMap<String, Admin> allAdmins = new HashMap<String, Admin>();
+
+	Admin a1 = new Admin("ar614c", "sivasridevi9");
+	Admin a2 = new Admin("kd8548", "dad@143");
+
+	public AdminService()
+	{
+		allAdmins.put("ar614c", a1);
+		allAdmins.put("kd8548", a2);
+
+	}
+
+	public ArrayList<Admin> getAllAdmins() {
+
+		ArrayList<Admin> productsList = new ArrayList<Admin>();
+
+		for (Entry<String, Admin> map : allAdmins.entrySet()) {
+
+			productsList.add(map.getValue());
+
+		}
+		System.out.println("sixe  :" + productsList.size());
+		return productsList;
+	}
+
+	public Admin getAdmin(String id) {
+		return allAdmins.get(id);
+	}
+
+	public Admin addAdmin(Admin admin) {
+		allAdmins.put(admin.getAdminId(), admin);
+		return admin;
+	}
+
+}

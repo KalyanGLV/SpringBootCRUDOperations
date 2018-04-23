@@ -1,0 +1,42 @@
+package com.ibm.demo.controller;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ibm.demo.service.LoginService;
+
+@RestController
+public class LoginController {
+
+	@Autowired
+	LoginService service;
+
+	@RequestMapping(value = "/login")
+	public String showWelcomePage(@RequestParam String name, @RequestParam String password) {
+
+		boolean isValidUser = service.validateUser(name, password);
+
+		if (isValidUser) {
+
+			return "Success";
+
+		}
+		return "lgin failed";
+
+	}
+	
+	@RequestMapping(value = "/login/allProducts")
+	public String getAll() {
+		service.getAllProducts();
+		return null;
+	}
+
+}

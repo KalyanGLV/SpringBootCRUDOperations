@@ -1,0 +1,13 @@
+package Utils;
+
+/*
+ * kg972t
+ * 
+ */
+public class ProdcutException extends Exception {
+	private static final long serialVersionUID = 1L;
+	private final String code;
+	private final String message;
+	
+
+}

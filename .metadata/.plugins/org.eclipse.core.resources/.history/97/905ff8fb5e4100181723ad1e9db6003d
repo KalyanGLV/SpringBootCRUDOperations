@@ -1,0 +1,18 @@
+package Utils;
+/*
+ * kg972t
+ * 
+ */
+public class Funclib {
+	
+	public static String nullCheckAndSet(Object o) {
+
+		return (!FuncLib.isNothing(o) ? String.valueOf(o) : "");
+
+	}
+	public static boolean isNothing(Object o) {
+
+		return (o == null);
+	}
+
+}

@@ -1,0 +1,42 @@
+package com.ibm.demo.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ibm.demo.service.LoginService;
+import com.ibm.demo.utils.ProdcutException;
+
+@Controller
+public class LoginController {
+
+	@Autowired
+	LoginService service;
+
+	@RequestMapping(value = "/login")
+	public String showWelcomePage(HttpServletRequest request, Model model) {
+
+		String isValidUser = service.validateUser(request);
+
+		if (!StringUtils.isEmpty(isValidUser)) {
+			model.addAttribute("userName", isValidUser);
+			return "home";
+		} else {
+			String fail = "Authentication Failed";
+			model.addAttribute("errorDescr", fail);
+			return "er";
+		}
+
+	}
+
+}

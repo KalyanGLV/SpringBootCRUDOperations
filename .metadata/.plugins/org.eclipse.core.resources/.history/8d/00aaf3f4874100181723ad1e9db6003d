@@ -1,0 +1,43 @@
+package com.ibm.demo.processor;
+
+import java.util.List;
+import java.util.Map;
+
+import com.ibm.demo.beans.Products;
+
+public class ProductProcessor {
+	
+	public List<Products> getAllProducts(){
+
+		
+		Map<String, Products> productsList = new HashMap<>();
+		
+		Product p1 = new Product("1","Opus 1122","Opus new series","","image");
+		Product p2 = new Product("2","Opus 9999","Opus 9 series","","image");
+		Product p3 = new Product("3","Opus 8888","Opus 8 series","","image");
+		
+		public ProductService()
+		{
+			productsList.put("1", p1);
+			productsList.put("2", p2);
+			productsList.put("3", p3);
+		}
+		
+	    private static void initEmps() {
+	        Products emp1 = new Products("5", "AVPN", "AVPN Service",);
+	        Products emp2 = new Products("E02", "Allen", "Salesman");
+	        Products emp3 = new Products("E03", "Jones", "Manager");
+	 
+	        empMap.put(emp1.getEmpNo(), emp1);
+	        empMap.put(emp2.getEmpNo(), emp2);
+	        empMap.put(emp3.getEmpNo(), emp3);
+	    }
+		return null;
+		
+		
+	
+		return null;
+		
+	}
+
+}

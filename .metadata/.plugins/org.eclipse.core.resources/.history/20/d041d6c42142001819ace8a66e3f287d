@@ -1,0 +1,72 @@
+package com.ibm.demo.controller;
+
+import java.util.List;
+
+/*
+ * 
+ * kg972t
+ * 
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ibm.demo.beans.Products;
+import com.ibm.demo.service.LoginService;
+import com.ibm.demo.utils.ProdcutException;
+
+@RestController
+public class LoginController {
+
+	@Autowired
+	LoginService service;
+
+	@RequestMapping(value = "/login")
+	public String showWelcomePage(@RequestParam String name, @RequestParam String password) throws ProdcutException {
+
+		String isValidUser = service.validateUser(name, password);
+
+		if(!StringUtils.isEmpty(isValidUser))
+		return "success";
+		
+		else {
+			throw new ProdcutException("00", "Invalid Credentials");
+		}
+
+	}
+	
+	@RequestMapping(value = "/login/allProducts")
+	public List<Products> getAllProduct() {
+		return service.getAllProducts();
+		 
+	}
+	
+	@RequestMapping(value = "/login/deleteProduct")
+	public List<Products> deleteProduct(@RequestBody Products product) {
+		return service.deleteProduct(product);
+		 
+	}
+	
+	@RequestMapping(value = "/login/deleteAllProducts")
+	public String deleteAllProducts() {
+		return service.deleteAllProduct();
+		 
+	}
+	
+	@RequestMapping(value = "/login/updateProduct")
+	public List<Products> updateProduct(@RequestBody Products product) {
+		return service.updateProduct(product);
+		 
+	}
+	
+	@RequestMapping(value = "/login/addProduct")
+	public List<Products> addProduct(@RequestBody Products product) {
+		return service.addProduct(product);
+		 
+	}
+
+}

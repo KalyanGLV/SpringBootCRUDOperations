@@ -1,0 +1,5 @@
+userName ="kg972t"
+password ="welcome"
+
+spring.security.user.name="kg972t"
+spring.security.user.password="welcome"

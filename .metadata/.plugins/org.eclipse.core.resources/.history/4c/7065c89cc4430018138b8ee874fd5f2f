@@ -1,0 +1,12 @@
+package com.ibm.demo.controller;
+/*
+ * kg972t
+ * 
+ */
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ProductController {
+
+}
